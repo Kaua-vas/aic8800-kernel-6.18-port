@@ -1,0 +1,31 @@
+--- a/drivers/aic8800/aic8800_fdrv/aicwf_txrxif.c
++++ b/drivers/aic8800/aic8800_fdrv/aicwf_txrxif.c
+@@ -1047,8 +1047,13 @@ void aicwf_rx_deinit(struct aicwf_rx_priv* rx_priv)
+        AICWFDBG(LOGINFO, "stio rx thread\n");
+ #ifdef AICWF_SDIO_SUPPORT
+     if (rx_priv->sdiodev->bus_if->busrx_thread) {
++        struct task_struct *thread = rx_priv->sdiodev->bus_if->busrx_thread;
++        rx_priv->sdiodev->bus_if->busrx_thread = NULL;
++        
+         complete_all(&rx_priv->sdiodev->bus_if->busrx_trgg);
+-        kthread_stop(rx_priv->sdiodev->bus_if->busrx_thread);
++        if (!IS_ERR_OR_NULL(thread) && thread->__state != TASK_DEAD)
++            kthread_stop(thread);
++        
+         rx_priv->sdiodev->bus_if->busrx_thread = NULL;
+     }
+ #endif
+@@ -1058,8 +1063,13 @@ void aicwf_rx_deinit(struct aicwf_rx_priv* rx_priv)
+         tasklet_kill(&rx_priv->usbdev->recv_tasklet);
+ #endif
+     if (rx_priv->usbdev->bus_if->busrx_thread) {
++        struct task_struct *thread = rx_priv->usbdev->bus_if->busrx_thread;
++        rx_priv->usbdev->bus_if->busrx_thread = NULL;
++        
+         complete_all(&rx_priv->usbdev->bus_if->busrx_trgg);
+-        kthread_stop(rx_priv->usbdev->bus_if->busrx_thread);
++        if (!IS_ERR_OR_NULL(thread) && thread->__state != TASK_DEAD)
++            kthread_stop(thread);
++        
+         rx_priv->usbdev->bus_if->busrx_thread = NULL;
+     }

@@ -1,0 +1,17 @@
+GNU GENERAL PUBLIC LICENSE
+Version 2, June 1991
+
+Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+This driver is licensed under GPL v2, consistent with the Linux kernel
+and the original AIC8800 driver source.
+
+Patches and modifications for Kernel 6.18+ compatibility:
+Copyright (C) 2026 AIC8800 Community Contributors
+
+For the full GPL v2 license text, see:
+https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
