@@ -197,3 +197,48 @@ This driver is provided as-is for educational and development purposes. The main
 
 **Last Updated**: January 2026  
 **Maintainer**: @Kaua-vas
+
+## ⚠️ DKMS Support Status
+
+**Current Status**: DKMS auto-rebuild is **NOT enabled** for this driver.
+
+### Why?
+The patches required for Kernel 6.18+ compatibility involve manual code changes that cannot be easily automated via DKMS. The kernel API can change between minor versions (6.18.x → 6.19.x), requiring different patches.
+
+### What This Means
+- ✅ Driver works perfectly on Kernel 6.18.3
+- ⚠️ **After kernel updates**, you may need to reinstall the driver
+- ⚠️ Watch for compilation errors in `/var/log/messages` after updates
+
+### Monitoring Kernel Updates
+
+```bash
+# Check for kernel updates
+sudo dnf updateinfo list --updates | grep kernel
+
+# After kernel update, test if driver still loads
+sudo modprobe aic8800_fdrv
+dmesg | tail -20
+```
+
+### Reinstalling After Kernel Update
+
+If the driver stops working after a kernel update:
+
+```bash
+cd ~/aic8800dc-linux-patched
+git pull  # Get latest patches if available
+make -C drivers/aic8800 clean
+make -C drivers/aic8800
+sudo make -C drivers/aic8800 install
+sudo modprobe aic_load_fw
+sudo modprobe aic8800_fdrv
+```
+
+### Future DKMS Support
+DKMS integration is planned but requires:
+- Kernel version detection in build scripts
+- Conditional patching based on kernel API
+- Automated testing across kernel versions
+
+Contributions welcome! 🛠️
