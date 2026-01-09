@@ -52,7 +52,7 @@ sudo pacman -S git dkms base-devel linux-headers
 
 ```bash
 # Clone this repository
-git clone https://github.com/YOUR_USERNAME/aic8800-kernel-6.18-port.git
+git clone https://github.com/Kaua-vas/aic8800-kernel-6.18-port.git
 cd aic8800-kernel-6.18-port
 
 # Run automatic installation
@@ -189,11 +189,11 @@ This driver is provided as-is for educational and development purposes. The main
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/aic8800-kernel-6.18-port/issues)
+- **Issues**: [GitHub Issues](https://github.com/Kaua-vas/aic8800-kernel-6.18-port/issues)
 - **Tested**: Fedora 43, Kernel 6.18.3
 - **Status**: Production-ready
 
 ---
 
 **Last Updated**: January 2026  
-**Maintainer**: @YOUR_USERNAME
+**Maintainer**: @Kaua-vas
